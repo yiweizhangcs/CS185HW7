@@ -7,7 +7,7 @@ export class CreateList extends Component {
   constructor(props) {
     super();
     this.state = {
-      Alist: '',
+      listName: '',
     }
   }
 
@@ -16,17 +16,22 @@ export class CreateList extends Component {
       firebase.initializeApp(config);
     }
   }
+
   FunctionB = (event) => {
     let tempA = event.target.name;
     let value = event.target.value;
     this.setState({[tempA]: value});
   }
+  
   FunctionA = (event) => {
     event.preventDefault();
-    let one = {name: this.state.Alist,};
-    firebase.database().ref('lists').push().set(one);
+    let formObj = {
+      name: this.state.listName,
+    };
+    firebase.database().ref('lists').push().set(formObj);
     alert("You successfully created a new list!");
   }
+
 
 
   render() {
